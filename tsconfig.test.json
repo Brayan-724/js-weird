@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "include": ["test/**/*.ts", "src/**/*.ts"],
+  "compilerOptions": {
+    "composite": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "js-weird",
+  "version": "0.0.1",
+  "description": "Transform a javascript code to obfuscated code using weird arrays",
+  "main": "index.js",
+  "author": "Apika Luca",
+  "license": "MIT",
+  "devDependencies": {
+    "@ef-carbon/tspm": "^2.2.5",
+    "@swc/core": "^1.2.218",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.6.0",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build:clear": "rm -rf ./lib",
+    "build:mv": "mv ./lib/src/* ./lib/ && rm -rf ./lib/src/",
+    "build:fix": "npm run inter:all-exports && npm run use-swc && npx ef-tspm --tsconfig ./tsconfig.build.json ",
+    "build:build": "tsc -p ./tsconfig.build.json",
+    "build": "npm run build:clear && npm run build:build && npm run build:mv && npm run build:fix",
+    "test": "ts-mocha -p ./tsconfig.build.json --paths test/**/*.ts --exclude test/**/_*.ts",
+    "test:unit": "ts-mocha -p ./tsconfig.build.json --paths src/**/*.test.ts",
+    "prepublishOnly": "npm run build",
+    "use-swc": "npm run inter:use-swc",
+    "inter:ex-node": "ts-node -P ./tsconfig.build.json -r tsconfig-paths/register",
+    "inter:add-export": "ts-node scripts/add-export.ts",
+    "inter:all-exports": "ts-node scripts/all-exports.ts",
+    "inter:use-swc": "ts-node scripts/use-swc.ts"
+  },
+  "dependencies": {
+    "tslib": "^2.4.0"
+  }
+}
