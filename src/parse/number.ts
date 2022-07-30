@@ -36,7 +36,7 @@ export function parseNumber(
 	else if (absN === 1) str = [one];
 	else str = getN(absN, minify);
 
-	const s = str.join(" ");
+	const s = str.join("");
 
 	return negative ? `-(${s})` : `${s}`;
 }

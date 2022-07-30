@@ -17,7 +17,7 @@ function _parse(...ns: (number | string)[]): string[] {
 function makeOperator(op: string) {
 	return (...values: (number | string)[]): string => {
 		const parsed = _parse(...values);
-		return `${parsed.join(` ${op} `)}`;
+		return `${parsed.join(`${op}`)}`;
 	};
 }
 

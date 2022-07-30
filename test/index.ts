@@ -2,7 +2,12 @@ import { compile } from "@";
 import { parseNumber } from "@/parse";
 import { smartNumber } from "@parser/smartNumber";
 
-console.log(compile("C"))
+compile(String.raw`function a() { return [...arguments] }; console.log(...a())`, {
+	minify: false,
+  ofuscate: false
+})
+	.then(console.log)
+	.catch(console.error);
 
 // for (let i = 0; i <= 500; i += 10) {
 // 	const v = smartNumber(i, true);
