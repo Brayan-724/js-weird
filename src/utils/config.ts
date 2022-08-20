@@ -1,7 +1,8 @@
 import { ExprStrictLevel, Options, ResolvedOptions } from "../types/lib";
+import { mergeDeep } from "./mergeDeep";
 
 export function resolveOptions(options: Options): ResolvedOptions {
-	return Object.assign(
+	return mergeDeep(
 		<ResolvedOptions>{
 			minify: true,
 			ofuscate: false,
@@ -20,7 +21,7 @@ export function resolveOptions(options: Options): ResolvedOptions {
 				},
 			},
 			autoRun: true,
-			map: new Map<string, string>()
+			map: new Map<string, string>(),
 		},
 		options
 	) as ResolvedOptions;

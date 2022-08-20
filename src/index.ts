@@ -5,6 +5,9 @@ import { fromString } from "./parse";
 import { VariableManager } from "./variable";
 import { generateMap } from "./map";
 
+export * from "./minifier";
+export * from "./variable";
+
 export async function compile(
 	code: string,
 	options?: Options
@@ -17,7 +20,6 @@ export async function compile(
 		"constructor",
 		resolvedOptions
 	)}](${fromString(code, resolvedOptions, true)})()`;
-	// let outCode = "";
 
 	for (const var_ of VariableManager.getOrder()) {
 		const _var = VariableManager.get(var_);

@@ -1,12 +1,12 @@
 import {
 	fromString,
-	getArrayConstructor,
+	getArrayConstructorString,
 	getBool,
 	getInfinity,
 	getNaN,
 	getObject,
-	getRegexConstructor,
-	getStringConstructor,
+	getRegexConstructorString,
+	getStringConstructorString,
 	smartNumber,
 } from "./parse";
 import { ResolvedOptions } from "./types";
@@ -22,8 +22,8 @@ function setFrom(val: string, str: string, options: ResolvedOptions): void {
 /**
  * Chars:
  * ```plain
- * a, b, c, d, e, f, g, h, i,  ,  , l, m, n, o, p,  , r, s, t, u,  ,  , x,  ,  ,
- *  ,  , C,  , E,  ,  ,  , I,  ,  ,  ,  , N, O,  ,  , R, S,  ,  ,  ,  ,  ,  ,  ,
+ * a, b, c, d, e, f, g, h, i,  ,  , l, m, n, o, p,  , r, s, t, u,  ,  , x, y,  ,
+ * A,  , C,  , E,  ,  ,  , I,  ,  ,  ,  , N, O,  ,  , R, S,  ,  ,  ,  ,  ,  ,  ,
  * \, {, }, (, ), [, ]
  * <SPACE>
  * ```
@@ -31,15 +31,8 @@ function setFrom(val: string, str: string, options: ResolvedOptions): void {
 export function generateMap(options: ResolvedOptions): Map<string, string> {
 	const map = options.map;
 
-	const n_0 = smartNumber(0, options);
 	const n_1 = smartNumber(1, options);
 	const n_2 = smartNumber(2, options);
-	const n_3 = smartNumber(3, options);
-	const n_4 = smartNumber(4, options);
-	const n_5 = smartNumber(5, options);
-	const n_6 = smartNumber(6, options);
-	const n_7 = smartNumber(7, options);
-	const n_9 = smartNumber(9, options);
 	const n_13 = smartNumber(13, options);
 	const n_14 = smartNumber(14, options);
 	const n_17 = smartNumber(17, options);
@@ -53,12 +46,12 @@ export function generateMap(options: ResolvedOptions): Map<string, string> {
 	setFrom(getBool(true, options), "true", options);
 	setFrom(getInfinity(options), "Infinity", options);
 	setFrom(
-		getStringConstructor(options),
+		getStringConstructorString(options),
 		"function String() { [native code] }",
 		options
 	);
 	setFrom(
-		getRegexConstructor(options),
+		getRegexConstructorString(options),
 		"function RegExp() { [native code] }",
 		options
 	);
@@ -76,7 +69,7 @@ export function generateMap(options: ResolvedOptions): Map<string, string> {
 	);
 
 	setFrom(
-		getArrayConstructor(options),
+		getArrayConstructorString(options),
 		"function Array() { [native code] }",
 		options
 	);

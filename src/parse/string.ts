@@ -2,6 +2,7 @@ import { ExprStrictLevel, ResolvedOptions } from "@/types";
 import { commentCode } from "@/utils/comment";
 import { VariableManager } from "@/variable";
 import { smartNumber } from "./smartNumber";
+import { getStringConstructor } from "./values";
 
 export function fromString(
 	s: string,
@@ -21,9 +22,8 @@ export function fromString(
 		.split("")
 		.map((x): string => {
 			if (!options.map.has(x)) {
-				console.log(x);
 				const charCode = x.charCodeAt(0);
-				return `([]+[])[${fromString("constructor", options)}][${fromString(
+				return `${getStringConstructor(options)}[${fromString(
 					"fromCharCode",
 					options
 				)}](${smartNumber(charCode, options)})`;

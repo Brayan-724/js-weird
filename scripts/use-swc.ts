@@ -37,7 +37,11 @@ async function parseFile(file: string) {
       parser: {
         syntax: "ecmascript",
       },
+      externalHelpers: true
     },
+    module: {
+      type: "commonjs",
+    }
   });
 
   log(`\x1b[34mWriting ${file}...\x1b[0m`);

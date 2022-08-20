@@ -1,46 +1,47 @@
 {
-  "extends": "./tsconfig.shared.json",
-  "include": ["src/**/*.ts"],
-  "compilerOptions": {
-    /* Projects */
-    // "incremental": true,
-    "composite": true,
+	"extends": "./tsconfig.shared.json",
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "scripts", "test", "src/**/*.test.ts"],
+	"compilerOptions": {
+		/* Projects */
+		// "incremental": true,
+		"composite": true,
 
-    /* JavaScript Support */
-    "allowJs": true,
+		/* JavaScript Support */
+		"allowJs": true,
 
-    /* Emit */
-    "declaration": true,
-    "outDir": "./lib",
-    "importHelpers": true,
-    "importsNotUsedAsValues": "remove",
-    "downlevelIteration": true,
-    "newLine": "lf",
-    "stripInternal": true,
-    "noEmitOnError": true,
+		/* Emit */
+		"declaration": true,
+		"outDir": "./lib",
+		"importHelpers": true,
+		"importsNotUsedAsValues": "remove",
+		"downlevelIteration": true,
+		"newLine": "lf",
+		"stripInternal": true,
+		"noEmitOnError": true,
 
-    /* Interop Constraints */
-    "esModuleInterop": true,
-    "preserveSymlinks": true,
-    "forceConsistentCasingInFileNames": true,
+		/* Interop Constraints */
+		"esModuleInterop": true,
+		"preserveSymlinks": true,
+		"forceConsistentCasingInFileNames": true,
 
-    /* Type Checking */
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "useUnknownInCatchVariables": true,
-    "exactOptionalPropertyTypes": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+		/* Type Checking */
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"useUnknownInCatchVariables": true,
+		"exactOptionalPropertyTypes": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
 
-    /* Completeness */
-    "skipLibCheck": true
-  }
+		/* Completeness */
+		"skipLibCheck": true
+	}
 }

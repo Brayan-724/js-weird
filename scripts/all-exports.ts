@@ -5,6 +5,8 @@ const [_, binPath, debug] = process.argv;
 
 const allExports = {
   index: ["index"],
+  parse: ["parse/index"],
+  bin: ["bin"],
 };
 
 async function main() {

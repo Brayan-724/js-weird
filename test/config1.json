@@ -1,0 +1,7 @@
+{
+	"$schema": "../config.schema.json",
+	"ofuscate": false,
+	"levels": {
+		"string": {}
+	}
+}

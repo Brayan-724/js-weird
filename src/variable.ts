@@ -22,6 +22,15 @@ export class VariableManager<K> {
 		}
 	}
 
+	/**
+	 * @throws Error if options has not been set
+	 */
+	private triggerOptions(): void {
+		if (!this.options) {
+			throw new Error("VariableManager: Options not set");
+		}
+	}
+
 	public getOrder(): K[] {
 		return [...this.order].reverse();
 	}
@@ -56,6 +65,7 @@ export class VariableManager<K> {
 		key: K,
 		valOrDecl: string | ((varname: string) => string)
 	): string {
+		this.triggerOptions();
 		const varname = this.generateName(key);
 		const declaration =
 			typeof valOrDecl === "function"
@@ -72,16 +82,18 @@ export class VariableManager<K> {
 	}
 
 	public generateName<G>(key: G): string {
+		this.triggerOptions();
 		if (this.options.ofuscate) {
-			const clean = Date.now().toString(32).substring(2);
+			const clean = Date.now().toString(32).substring(2, 7);
 			let varname = clean;
-			let exists = this.names.has(`${this.usedPrefix}_${varname}`);
+			let exists = VariableManager.order.has(`${this.usedPrefix}_${varname}`);
 			let attempts = 0;
 
 			while (exists) {
-				// console.log(clean, varname)
-				varname = `${clean}_${++attempts}`;
-				exists = this.names.has(`${this.usedPrefix}_${varname}`);
+				varname = ((Date.now() + Math.random() * 100000) | 0)
+					.toString(32)
+					.substring(2);
+				exists = VariableManager.order.has(`${this.usedPrefix}_${varname}`);
 			}
 
 			return `${this.usedPrefix}_${varname}`;
@@ -116,9 +128,7 @@ export class VariableManager<K> {
 
 	public reset(options: ResolvedOptions): void {
 		this.options = options;
-		this.usedPrefix = options.ofuscate
-			? variablePrefixes[this.index]!
-			: this.prefix;
+		this.usedPrefix = options.ofuscate ? "" : this.prefix;
 
 		this.variables.clear();
 		this.names.clear();

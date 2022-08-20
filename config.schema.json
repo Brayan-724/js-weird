@@ -1,0 +1,71 @@
+{
+	"title": "js-weird Configuration",
+	"description": "js-weird Configuration",
+	"type": "object",
+	"properties": {
+		"minify": {
+			"$comment": "If should minify the output.\n @see true: [uglify-js](https://www.npmjs.com/package/uglify-js)\n@see false: [prettier](https://www.npmjs.com/package/prettier)\nDefault: false",
+			"type": "boolean"
+		},
+
+		"ofuscate": {
+			"$comment": "If can use minified names for literals.\nDefault: false",
+			"type": "boolean",
+			"default": false
+		},
+
+		"autoRun": {
+			"$comment": "Use an auto called function.\nDefault: true",
+			"type": "boolean",
+			"default": true
+		},
+		"levels": {
+			"$comment": "Strict level.",
+			"type": "object",
+			"properties": {
+				"string": {
+					"$ref": "#/definitions/ExprOptions"
+				},
+				"number": {
+					"$ref": "#/definitions/ExprOptions"
+				},
+				"values": {
+					"$ref": "#/definitions/ExprOptions"
+				}
+			}
+		}
+	},
+	"definitions": {
+		"ExprStrictLevel": {
+			"$comment": "Strict Level.\nDefault: \"stored\"",
+			"default": "stored",
+			"oneOf": [
+				{
+					"const": "literal",
+					"$comment": "Direct literal value"
+				},
+				{
+					"const": "stored",
+					"$comment": "Store expression in a variable"
+				},
+				{
+					"const": "strict",
+					"$comment": "Just use arrays"
+				}
+			]
+		},
+		"ExprOptions": {
+			"type": "object",
+			"properties": {
+				"comment": {
+					"$comment": "Comment the value before declaration or expression.\nDefault: false",
+					"type": "boolean",
+					"default": false
+				},
+				"level": {
+					"$ref": "#/definitions/ExprStrictLevel"
+				}
+			}
+		}
+	}
+}

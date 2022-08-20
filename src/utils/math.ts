@@ -1,11 +1,16 @@
-import { parseNumber } from "@parser/number";
+import { smartNumber } from "@/parse";
+import { ResolvedOptions } from "@/types";
+// import { parseNumber } from "@parser/number";
 
 const zero = "![]";
 const one = "!![]";
 
-function _parse(...ns: (number | string)[]): string[] {
+function _parse(
+	options: ResolvedOptions,
+	...ns: (number | string)[]
+): string[] {
 	return ns.map((e) => {
-		if (typeof e === "number") return `(${parseNumber(e, true)})`;
+		if (typeof e === "number") return `(${smartNumber(e, options)})`;
 		if (typeof e === "string") return `(${e})`;
 
 		throw new TypeError(
@@ -15,8 +20,8 @@ function _parse(...ns: (number | string)[]): string[] {
 }
 
 function makeOperator(op: string) {
-	return (...values: (number | string)[]): string => {
-		const parsed = _parse(...values);
+	return (options: ResolvedOptions, ...values: (number | string)[]): string => {
+		const parsed = _parse(options, ...values);
 		return `${parsed.join(`${op}`)}`;
 	};
 }
@@ -25,14 +30,23 @@ const _add = makeOperator("+");
 const _mult = makeOperator("*");
 const _pow = makeOperator("**");
 
-export function add(...values: (number | string)[]): string {
-	return _add(...values);
+export function add(
+	options: ResolvedOptions,
+	...values: (number | string)[]
+): string {
+	return _add(options, ...values);
 }
 
-export function mult(...values: (number | string)[]): string {
-	return _mult(...values);
+export function mult(
+	options: ResolvedOptions,
+	...values: (number | string)[]
+): string {
+	return _mult(options, ...values);
 }
 
-export function pow(...values: (number | string)[]): string {
-	return _pow(...values);
+export function pow(
+	options: ResolvedOptions,
+	...values: (number | string)[]
+): string {
+	return _pow(options, ...values);
 }
